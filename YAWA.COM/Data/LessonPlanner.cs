@@ -8,7 +8,7 @@ namespace YAWA.COM.Data
         //Authentication 
         [BindNever]
         [MaxLength(500)]
-        public string? userId { get; set; }
+        public string? UserId { get; set; }
 
         //Database Table for LessonPlanner
         [Key]
