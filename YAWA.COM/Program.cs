@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using YAWA.COM.Contracts;
 using YAWA.COM.Data;
+using YAWA.COM.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 //Inject IBaseRepository and BaseRepository
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(IBaseRepository<>));
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 // New Force Login StartUp
 builder.Services.ConfigureApplicationCookie(option =>

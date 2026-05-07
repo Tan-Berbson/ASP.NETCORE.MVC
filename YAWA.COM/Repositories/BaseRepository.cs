@@ -43,7 +43,7 @@ namespace YAWA.COM.Repositories
                 .ToListAsync();
         }
 
-        public async Task<T?> GetOne(string id, string userId)
+        public async Task<T?> GetOne(object id, string userId)
         {
             var lesson = Convert.ToInt32(id);
             return await _table.AsNoTracking()
