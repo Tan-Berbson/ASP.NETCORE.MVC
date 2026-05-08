@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11723.231 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YAWA.COM", "YAWA.COM\YAWA.COM.csproj", "{618DB3A8-F840-4AF1-A684-1CA52051855E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAC-WEB102", "YAWA.COM\PRAC-WEB102.csproj", "{618DB3A8-F840-4AF1-A684-1CA52051855E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
