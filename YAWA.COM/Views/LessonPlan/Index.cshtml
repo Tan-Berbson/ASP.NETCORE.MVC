@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LessonPlanner>  
+<div class="content">
+    <h2>Lesson Planner DashBoard</h2>
+    <hr />
+    <div class="row">
+        <div>
+            @if(TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible  fade-show font-monospace" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="btn btn-close" data-bs-dismissable="alert"></button>
+                </div>
+            }
+            <div class="col-12 mb-2">
+                <a asp-action="Create" class="btn btn-primary">Create</a>
+            </div>
+            <div class="col-12"> 
+                <table class="table table-bordered table-hover table-sm font-monospace">
+                    <colgroup>
+                        <col class="col-4" />
+                        <col class="col-5" />
+                        <col class="col-4" />
+                        
+                    </colgroup>
+                    <thead class="bg-danger text-dark">
+                        <tr>
+                            <th>LessonName</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.LessonName</td>
+                            <td>@item.LessonDescription</td>
+                            <td>
+                                <a asp-action="Edit" class="btn btn-primary">Edit</a>
+                                <a asp-action="Delete" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -18,6 +18,8 @@ namespace YAWA.COM.Controllers
           var lesson = await _repo.GetAll(CurrentUserId);
             return View(lesson);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LessonPlanner lesson)
         {
             if(!ModelState.IsValid)
@@ -36,6 +38,8 @@ namespace YAWA.COM.Controllers
             return View(entity); 
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(LessonPlanner lesson)
         {
             if(!ModelState.IsValid)
@@ -56,6 +60,8 @@ namespace YAWA.COM.Controllers
             return View(entity);
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmedDelete(int id, LessonPlanner lesson)
         {
             await _repo.Delete(id, CurrentUserId);
