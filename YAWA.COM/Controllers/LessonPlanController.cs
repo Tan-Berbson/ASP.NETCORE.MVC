@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using YAWA.COM.Contracts;
 using YAWA.COM.Data;
+using YAWA.COM.Helpers;
 
 namespace YAWA.COM.Controllers
 {
@@ -12,6 +13,17 @@ namespace YAWA.COM.Controllers
         public LessonPlanController(IBaseRepository<LessonPlanner> repo)
         {
             _repo = repo;
+        }
+        private void SanitizeLesson(LessonPlanner lesson)
+        {
+            lesson.LessonTittle =
+                SanitizerHelper.Sanitize(lesson.LessonTittle);
+
+            lesson.LessonName =
+                SanitizerHelper.Sanitize(lesson.LessonName);
+
+            lesson.LessonDescription =
+                SanitizerHelper.Sanitize(lesson.LessonDescription);
         }
         public async Task<IActionResult> Index()
         {
@@ -24,6 +36,7 @@ namespace YAWA.COM.Controllers
         {
             if(!ModelState.IsValid)
                 return View(lesson);
+            SanitizeLesson(lesson);
 
             await _repo.Create(lesson, CurrentUserId);
             TempData["Message"] = $"{lesson} Created Successfully";
@@ -44,6 +57,8 @@ namespace YAWA.COM.Controllers
         {
             if(!ModelState.IsValid)
                 return View(lesson);
+
+            SanitizeLesson(lesson);
 
             var existlesson = await _repo.GetOne(lesson.LessonId, CurrentUserId);
             if(existlesson == null)

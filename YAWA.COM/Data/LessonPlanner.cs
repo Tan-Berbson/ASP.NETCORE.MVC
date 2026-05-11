@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YAWA.COM.Data
 {
     public class LessonPlanner
     {
+        //foriegn key sa asp.netUser
+        [ForeignKey("UserId")]
+        public IdentityUser? user { get; set; }
+
         //Authentication 
         [BindNever]
-        [MaxLength(500)]
+        [MaxLength(450)]
         public string? UserId { get; set; }
 
         //Database Table for LessonPlanner

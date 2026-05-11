@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using YAWA.COM.Contracts;
 using YAWA.COM.Data;
@@ -23,6 +24,16 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.ConfigureApplicationCookie(option =>
 option.LoginPath = "/Identity/Account/Login");
 
+// Rate Limeter
+builder.Services.AddRateLimiter(options =>
+options.AddFixedWindowLimiter("fixed", limeter =>
+{
+    limeter.PermitLimit = 5;
+    limeter.Window = TimeSpan.FromSeconds(10);
+}));
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,7 +47,7 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseRateLimiter();
 app.UseHttpsRedirection();
 app.UseRouting();
 
