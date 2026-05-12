@@ -17,13 +17,15 @@
             <div class="col-12"> 
                 <table class="table table-bordered table-hover table-sm font-monospace">
                     <colgroup>
-                        <col class="col-4" />
-                        <col class="col-5" />
-                        <col class="col-4" />
+                        <col class="col-3" />
+                        <col class="col-3" />
+                        <col class="col-3" />
+                        <col class="col-3" />
                         
                     </colgroup>
                     <thead class="bg-danger text-dark">
                         <tr>
+                            <th>LessonTitle</th>
                             <th>LessonName</th>
                             <th>Description</th>
                             <th>Actions</th>
@@ -32,11 +34,12 @@
                     @foreach(var item in Model)
                     {
                         <tr>
+                            <td>@item.LessonTittle</td>
                             <td>@item.LessonName</td>
                             <td>@item.LessonDescription</td>
                             <td>
-                                <a asp-action="Edit" class="btn btn-primary">Edit</a>
-                                <a asp-action="Delete" class="btn btn-danger">Delete</a>
+                                <a asp-action="Edit" asp-route-id="@item.LessonId"  class="btn btn-primary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.LessonId" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     }

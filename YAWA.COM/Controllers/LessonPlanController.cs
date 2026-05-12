@@ -30,9 +30,13 @@ namespace YAWA.COM.Controllers
           var lesson = await _repo.GetAll(CurrentUserId);
             return View(lesson);
         }
+        public IActionResult Create()
+        {
+            return View(new LessonPlanner());
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(LessonPlanner lesson)
+        public async Task<IActionResult>Create(LessonPlanner lesson)
         {
             if(!ModelState.IsValid)
                 return View(lesson);
