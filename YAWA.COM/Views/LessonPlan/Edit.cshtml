@@ -1,4 +1,32 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LessonPlanner
+<div class="content">
+    <div class="row">
+        <h2>Edit Lesson</h2>
+        <hr />
+        <form asp-action="Update" method="post">
+            @Html.AntiForgeryToken()
+            <input asp-for="LessonId" type="hidden" />
+            <div class="form-group  mb-2 ">
+                <label asp-for="LessonTittle">LessonTitle</label>
+                <input asp-for="LessonTittle" class="form-control" type="text" />
+                <span asp-validation-for="LessonTittle"></span>
+            </div>
+            <div class="form-group mb-2 ">
+                <label asp-for="LessonName">LessonName</label>
+                <input asp-for="LessonName" class="form-control" type="text" />
+                <span asp-validation-for="LessonName"></span>
+            </div>
+            <div class="form-group mb-2 ">
+                <label asp-for="LessonDescription">LessonDescription</label>
+                <input asp-for="LessonDescription" class="form-control" type="text" />
+                <span asp-validation-for="LessonDescription"></span>
+            </div>
+            <div class="d-grid mb-2">
+                <a asp-action="Index" class="btn btn-primary">Cancel</a>
+            </div>
+            <div class="d-grid mb-2">
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
