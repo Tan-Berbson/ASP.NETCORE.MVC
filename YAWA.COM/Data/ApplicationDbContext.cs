@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using YAWA.Data;
 
 namespace YAWA.COM.Data
 {
@@ -10,5 +11,8 @@ namespace YAWA.COM.Data
         {
         }
         public virtual DbSet<LessonPlanner> LessonPlanners { get; set; }
+        public virtual DbSet<MontlyTask> MontlyTasks { get; set; }
+
+        public virtual DbSet<Ipon> Ipons { get; set; }
     }
 }

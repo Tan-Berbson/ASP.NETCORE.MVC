@@ -19,6 +19,8 @@ builder.Services.AddControllersWithViews();
 
 //Inject IBaseRepository and BaseRepository
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped(typeof(IMonthlyTaskPlan), typeof(MontlyTaskPlan));
+builder.Services.AddScoped(typeof(IIponRepository), typeof(IponRepository));
 
 // New Force Login StartUp
 builder.Services.ConfigureApplicationCookie(option =>
