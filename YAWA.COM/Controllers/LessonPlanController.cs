@@ -64,10 +64,10 @@ namespace YAWA.COM.Controllers
 
             SanitizeLesson(lesson);
 
-            var existlesson = await _repo.GetOne(lesson.LessonId, CurrentUserId);
+            var existlesson = await _repo.GetOne(lesson.Id, CurrentUserId);
             if(existlesson == null)
                 return NotFound();
-            await _repo.Update(lesson.LessonId, new {lesson.LessonName, lesson.LessonDescription}, CurrentUserId);
+            await _repo.Update(lesson.Id, new {lesson.LessonName, lesson.LessonDescription}, CurrentUserId);
             TempData["Message"] = $"{lesson} Updated Successfully";
             return RedirectToAction("Index");
         }

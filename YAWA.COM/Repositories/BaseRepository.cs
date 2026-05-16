@@ -5,7 +5,7 @@ using YAWA.COM.Data;
 namespace YAWA.COM.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T>
-        where T : LessonPlanner
+        where T : BaseEntity
     {
         private readonly ApplicationDbContext _db;
         private readonly DbSet<T> _table;
@@ -18,46 +18,43 @@ namespace YAWA.COM.Repositories
 
         public Task Create(T t, string userId)
         {
-           t.UserId= userId;
+            t.UserId = userId;
             _table.Add(t);
             return _db.SaveChangesAsync();
         }
 
         public async Task Delete(object id, string userId)
         {
-            var lessonid = Convert.ToInt32(id);
-            var lesson = await _table.FirstOrDefaultAsync(l => l.LessonId == lessonid && l.UserId == userId);
-            if (lesson == null)
+            var entityId = Convert.ToInt32(id);
+            var entity = await _table.FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
+            if (entity == null)
                 return;
-            _table.Remove(lesson);
+            _table.Remove(entity);
             await _db.SaveChangesAsync();
-
-
-
         }
 
         public async Task<IEnumerable<T>> GetAll(string userId)
         {
-           return await _table.AsNoTracking()
-                .Where(l => l.UserId == userId)
+            return await _table.AsNoTracking()
+                .Where(e => e.UserId == userId)
                 .ToListAsync();
         }
 
         public async Task<T?> GetOne(object id, string userId)
         {
-            var lesson = Convert.ToInt32(id);
+            var entityId = Convert.ToInt32(id);
             return await _table.AsNoTracking()
-                .FirstOrDefaultAsync(l => l.LessonId == lesson && l.UserId == userId);  
+                .FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
         }
 
         public async Task Update(object id, object model, string userId)
         {
-            var lessonId = Convert.ToInt32(id);
-            var lesson = await _table.FirstOrDefaultAsync(l => l.LessonId == lessonId && l.UserId == userId);
-            if (lesson == null)
+            var entityId = Convert.ToInt32(id);
+            var entity = await _table.FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
+            if (entity == null)
                 return;
 
-            _db.Entry(lesson).CurrentValues.SetValues(model);
+            _db.Entry(entity).CurrentValues.SetValues(model);
             await _db.SaveChangesAsync();
         }
     }

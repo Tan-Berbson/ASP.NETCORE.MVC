@@ -1,6 +1,5 @@
 ﻿using YAWA.COM.Contracts;
 using YAWA.COM.Data;
-using YAWA.Data;
 
 namespace YAWA.COM.Repositories
 {

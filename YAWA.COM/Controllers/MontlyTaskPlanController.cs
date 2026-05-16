@@ -8,10 +8,8 @@ namespace YAWA.COM.Controllers
     public class MontlyTaskPlanController : BaseController
     {
         private readonly IMonthlyTaskPlan _repo;
-        public MontlyTaskPlanController(MontlyTaskPlan repo)
-        { 
-            _repo = repo;
-        }
+       
+        public MontlyTaskPlanController(IMonthlyTaskPlan repo) => _repo = repo;
 
         public async Task<IActionResult> Index()
         {

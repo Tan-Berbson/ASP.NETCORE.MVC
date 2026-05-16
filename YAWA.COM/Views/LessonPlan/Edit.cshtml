@@ -5,7 +5,7 @@
         <hr />
         <form asp-action="Update" method="post">
             @Html.AntiForgeryToken()
-            <input asp-for="LessonId" type="hidden" />
+            <input asp-for="Id" type="hidden" />
             <div class="form-group  mb-2 ">
                 <label asp-for="LessonTittle">LessonTitle</label>
                 <input asp-for="LessonTittle" class="form-control" type="text" />

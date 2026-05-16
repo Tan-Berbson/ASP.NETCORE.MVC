@@ -1,4 +1,4 @@
-﻿using YAWA.Data;
+﻿using YAWA.COM.Data;
 
 namespace YAWA.COM.Contracts
 {
@@ -6,5 +6,5 @@ namespace YAWA.COM.Contracts
     {
 
     }
-        
+
 }
