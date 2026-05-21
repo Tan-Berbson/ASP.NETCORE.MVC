@@ -1,4 +1,8 @@
-﻿@model IEnumerable<LessonPlanner>  
+﻿@model IEnumerable<LessonPlanner>
+@{
+    var titles = ViewData["Titles"] as IEnumerable<string>;
+    var selectedTitle = ViewData["SelectedTitle"] as string;
+}
 <div class="content">
     <h2>Lesson Planner DashBoard</h2>
     <hr />
@@ -11,6 +15,33 @@
                     <button type="button" class="btn btn-close" data-bs-dismissable="alert"></button>
                 </div>
             }
+            <div class="col-12 mb-3">
+                <form method="get" class="row g-2 align-items-end">
+                    <div class="col-md-4">
+                        <label for="titleFilter" class="form-label">Filter by Title</label>
+                        <select id="titleFilter" name="title" class="form-select">
+                            <option value="">-- All Titles --</option>
+                            @if(titles != null)
+                            {
+                                @foreach(var t in titles)
+                                {
+                                    if(t == selectedTitle)
+                                    {
+                                        <option value="@t" selected>@t</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@t">@t</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-info w-100">Filter</button>
+                    </div>
+                </form>
+            </div>
             <div class="col-12 mb-2">
                 <a asp-action="Create" class="btn btn-primary">Create</a>
             </div>
@@ -21,7 +52,7 @@
                         <col class="col-3" />
                         <col class="col-3" />
                         <col class="col-3" />
-                        
+
                     </colgroup>
                     <thead class="bg-danger text-dark">
                         <tr>

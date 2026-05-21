@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using YAWA.COM.Contracts;
 using YAWA.COM.Data;
 using YAWA.COM.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace YAWA.COM.Controllers
 {
@@ -11,7 +13,7 @@ namespace YAWA.COM.Controllers
         private readonly ILessonPlannerRepository _repo;
 
         public LessonPlanController(ILessonPlannerRepository repo) => _repo = repo;
-        
+
         private void SanitizeLesson(LessonPlanner lesson)
         {
             lesson.LessonTittle =
@@ -23,10 +25,20 @@ namespace YAWA.COM.Controllers
             lesson.LessonDescription =
                 SanitizerHelper.Sanitize(lesson.LessonDescription);
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? title = null)
         {
-          var lesson = await _repo.GetAll(CurrentUserId);
-            return View(lesson);
+            var lessons = await _repo.GetAll(CurrentUserId);
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                lessons = lessons.Where(l => l.LessonTittle == title).ToList();
+            }
+
+            var titles = await _repo.GetDistinctTitles(CurrentUserId);
+            ViewData["Titles"] = titles;
+            ViewData["SelectedTitle"] = title;
+
+            return View(lessons);
         }
         public IActionResult Create()
         {
