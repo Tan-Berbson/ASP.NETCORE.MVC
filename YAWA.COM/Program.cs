@@ -17,8 +17,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-//Inject IBaseRepository and BaseRepository
+//Inject CONTRACTS and REPOSITORY FOLDER EXAPLE IBASEREPOSITORY AND BASE REPOSITORY
+
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped(typeof(ILessonPlannerRepository), typeof(LessonPlannerRepository));
 builder.Services.AddScoped(typeof(IMonthlyTaskPlan), typeof(MontlyTaskPlan));
 builder.Services.AddScoped(typeof(IIponRepository), typeof(IponRepository));
 

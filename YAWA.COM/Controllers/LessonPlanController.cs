@@ -8,12 +8,10 @@ namespace YAWA.COM.Controllers
 {
     public class LessonPlanController : BaseController
     {
-        private readonly IBaseRepository<LessonPlanner> _repo;
+        private readonly ILessonPlannerRepository _repo;
 
-        public LessonPlanController(IBaseRepository<LessonPlanner> repo)
-        {
-            _repo = repo;
-        }
+        public LessonPlanController(ILessonPlannerRepository repo) => _repo = repo;
+        
         private void SanitizeLesson(LessonPlanner lesson)
         {
             lesson.LessonTittle =
