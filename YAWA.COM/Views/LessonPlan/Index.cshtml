@@ -17,10 +17,10 @@
             }
             <div class="col-12 mb-3">
                 <form method="get" class="row g-2 align-items-end">
-                    <div class="col-md-4">
+                    <div class="col-md-10">
                         <label for="titleFilter" class="form-label">Filter by Title</label>
                         <select id="titleFilter" name="title" class="form-select">
-                            <option value="">-- All Titles --</option>
+                          
                             @if(titles != null)
                             {
                                 @foreach(var t in titles)
@@ -49,14 +49,12 @@
                 <table class="table table-bordered table-hover table-sm font-monospace">
                     <colgroup>
                         <col class="col-3" />
-                        <col class="col-3" />
-                        <col class="col-3" />
+                        <col class="col-6" />
                         <col class="col-3" />
 
                     </colgroup>
                     <thead class="bg-danger text-dark">
                         <tr>
-                            <th>LessonTitle</th>
                             <th>LessonName</th>
                             <th>Description</th>
                             <th>Actions</th>
@@ -65,7 +63,6 @@
                     @foreach(var item in Model)
                     {
                         <tr>
-                            <td>@item.LessonTittle</td>
                             <td>@item.LessonName</td>
                             <td>@item.LessonDescription</td>
                             <td>
