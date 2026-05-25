@@ -12,7 +12,7 @@ using YAWA.COM.Data;
 namespace PRACWEB102.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260523064349_init")]
+    [Migration("20260525011949_init")]
     partial class init
     {
         /// <inheritdoc />

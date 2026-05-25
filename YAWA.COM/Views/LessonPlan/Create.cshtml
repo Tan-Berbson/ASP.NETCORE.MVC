@@ -1,15 +1,27 @@
 ﻿@model LessonPlanner
+@{
+    var titles = ViewData["Titles"] as IEnumerable<string>;
+}
 <div class="content">
     <h2>
         Create Lesson
     </h2>
-    <div class="row">
-        @Html.AntiForgeryToken()
-
+    <div class="row">       
         <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group mb-2">
+            <label>select Existing Lesson Title</label>
+            <select id="TitleSelect" class="form-select">
+                <option value="">Select title</option>
+                @foreach (var item in titles)
+                {
+                    <option value="@item">@item</option>
+                }   
+            </select>
+        </div>
            <div class="form-group mb-3">
                <label asp-for="LessonTittle"> LessonTitle</label>
-               <input asp-for="LessonTittle" type="text" class="form-control" />
+               <input asp-for="LessonTittle" id="LessonTitle"type="text" class="form-control" />
                <span asp-validation-for="LessonTittle"></span>
            </div>
            <div class="form-group mb-3">
@@ -35,4 +47,22 @@
 
     </div>
 </div>
+@section Scripts
+{
+    <script>
+
+        const titleSelect =
+            document.getElementById("TitleSelect");
+
+        const lessonTitle =
+            document.getElementById("LessonTitle");
+
+        titleSelect.addEventListener("change", function () {
+
+            lessonTitle.value = this.value;
+
+        });
+
+    </script>
+}
 

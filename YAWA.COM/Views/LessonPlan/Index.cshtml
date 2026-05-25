@@ -1,81 +1,130 @@
 ﻿@model IEnumerable<LessonPlanner>
+
 @{
     var titles = ViewData["Titles"] as IEnumerable<string>;
     var selectedTitle = ViewData["SelectedTitle"] as string;
 }
+
 <div class="content">
-    <h2>Lesson Planner DashBoard</h2>
+
+    <h2>Lesson Planner Dashboard</h2>
     <hr />
-    <div class="row">
-        <div>
-            @if(TempData["Message"] != null)
-            {
-                <div class="alert alert-success alert-dismissible  fade-show font-monospace" role="alert">
-                    @TempData["Message"]
-                    <button type="button" class="btn btn-close" data-bs-dismissable="alert"></button>
-                </div>
-            }
-            <div class="col-12 mb-3">
-                <form method="get" class="row g-2 align-items-end">
-                    <div class="col-md-10">
-                        <label for="titleFilter" class="form-label">Filter by Title</label>
-                        <select id="titleFilter" name="title" class="form-select">
-                          
-                            @if(titles != null)
-                            {
-                                @foreach(var t in titles)
-                                {
-                                    if(t == selectedTitle)
-                                    {
-                                        <option value="@t" selected>@t</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@t">@t</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-info w-100">Filter</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12 mb-2">
-                <a asp-action="Create" class="btn btn-primary">Create</a>
-            </div>
-            <div class="col-12"> 
-                <table class="table table-bordered table-hover table-sm font-monospace">
-                    <colgroup>
-                        <col class="col-3" />
-                        <col class="col-6" />
-                        <col class="col-3" />
 
-                    </colgroup>
-                    <thead class="bg-danger text-dark">
-                        <tr>
-                            <th>LessonName</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    @foreach(var item in Model)
-                    {
-                        <tr>
-                            <td>@item.LessonName</td>
-                            <td>@item.LessonDescription</td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-primary">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    }
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show font-monospace" role="alert">
+            @TempData["Message"]
 
-                </table>
-
-            </div>
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
         </div>
+    }
+
+    <!-- FILTER -->
+    <div class="row mb-3">
+
+        <div class="col-md-6">
+
+            <form method="get">
+
+                <div class="input-group">
+
+                    <select name="title"
+                            class="form-select">
+
+                        <option value="">Select title</option>
+
+                        @foreach (var item in titles)
+                        {
+                            <option value="@item"
+                                    selected="@(selectedTitle == item)">
+                                @item
+                            </option>
+                        }
+
+                    </select>
+
+                    <button type="submit"
+                            class="btn btn-info">
+                        Filter
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
+
+    <!-- CREATE BUTTON -->
+    <div class="mb-3">
+        <a asp-action="Create"
+           class="btn btn-primary">
+            Create
+        </a>
+    </div>
+
+    <!-- TABLE -->
+    <table class="table table-bordered table-hover table-sm font-monospace">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Lesson Name</th>
+                <th>Description</th>
+                <th width="200">Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @if (Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.LessonName</td>
+
+                        <td>@item.LessonDescription</td>
+
+                        <td>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+
+                    <td colspan="3"
+                        class="text-center text-muted">
+                        No lessons found.
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
 
 </div>

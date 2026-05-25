@@ -27,21 +27,22 @@ namespace YAWA.COM.Controllers
         }
         public async Task<IActionResult> Index(string? title = null)
         {
-            var lessons = await _repo.GetAll(CurrentUserId);
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                lessons = lessons.Where(l => l.LessonTittle == title).ToList();
-            }
-
             var titles = await _repo.GetDistinctTitles(CurrentUserId);
             ViewData["Titles"] = titles;
             ViewData["SelectedTitle"] = title;
 
+            List<LessonPlanner> lessons = new();
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                lessons = await _repo.GetByTitle(title, CurrentUserId);
+            }
             return View(lessons);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewData["Titles"] = await _repo.GetDistinctTitles(CurrentUserId);
+
             return View(new LessonPlanner());
         }
         [HttpPost]
