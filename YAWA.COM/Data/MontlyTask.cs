@@ -6,7 +6,21 @@ namespace YAWA.COM.Data
     public class MontlyTask : BaseEntity
     {
         [Required, MaxLength(100)]
-        public string MontlyTaskName { get; set; }
+        public string DailyTaskName { get; set; }
+
+        [Required, MaxLength(100)]
+        public string TaskStatus { get; set; }
+
+        [Required]
+        public DateOnly StartDate { get; set; }
+
+        [Required]
+        public DateOnly EndDate { get; set; }
+
+        [Required,MaxLength(100)]
+        public string MontlyTaskCategory { get; set; }
+
+
     }
 }
 
