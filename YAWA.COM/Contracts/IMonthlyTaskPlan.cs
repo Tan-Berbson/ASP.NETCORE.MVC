@@ -6,5 +6,9 @@ namespace YAWA.COM.Contracts
 {
         Task<IEnumerable<string>> GetDistictTitles(string userId);
         Task<List<MontlyTask>> GetByTitle(string title, string userId);
+
+        Task<IEnumerable<MontlyTask>> GetAlltasks(string userId);
+        Task UpdateMontly(MontlyTask model,string userId);
+
     }
 }

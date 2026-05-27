@@ -50,7 +50,9 @@ namespace YAWA.COM.Repositories
         public async Task Update(object id, object model, string userId)
         {
             var entityId = Convert.ToInt32(id);
-            var entity = await _table.FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
+            var entity = await _table.
+                
+                FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
             if (entity == null)
                 return;
 

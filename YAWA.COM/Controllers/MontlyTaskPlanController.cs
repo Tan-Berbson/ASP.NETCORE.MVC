@@ -14,13 +14,12 @@ namespace YAWA.COM.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var taskplan = await _repo.GetAll(CurrentUserId);
+            var taskplan = await _repo.GetAlltasks(CurrentUserId);
             return View(taskplan);
         }
         
         public async Task<IActionResult> Create()
         {
-            TempData["Message"] = await _repo.GetDistictTitles(CurrentUserId);
             return View(new MontlyTask());
         }
 
@@ -33,8 +32,32 @@ namespace YAWA.COM.Controllers
 
             await _repo.Create(tasks ,CurrentUserId);
             TempData["Message"] = $"MontlyTask{tasks} Created Successfully";
-            return View(RedirectToAction("Index"));
+            return RedirectToAction("Index");
             
+        }
+       
+        public async Task<IActionResult> Edit(int id)
+        {
+            var entity = await _repo.GetOne(id,CurrentUserId);
+            if(entity == null)
+                return NotFound();
+
+            return View(entity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(MontlyTask tasks)
+        {
+            if (!ModelState.IsValid)
+                return View("Edit", tasks); // ✅ Tell it to use Edit.cshtml
+
+            var existtask = await _repo.GetOne(tasks.Id, CurrentUserId);
+            if (existtask == null)
+                return NotFound();
+
+            await _repo.UpdateMontly(tasks, CurrentUserId); // ✅ Pass the full object
+            return RedirectToAction("Index");
         }
 
 
