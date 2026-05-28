@@ -7,9 +7,9 @@
             @Html.AntiForgeryToken()
             <input asp-for="Id" type="hidden" />
             <div class="form-group mb-2">
-                <label asp-for="MontlyTaskCategory">MontlyTaskCategory</label>
-                <input asp-for="MontlyTaskCategory" type="text" class="form-control" />
-                <span asp-validation-for="MontlyTaskCategory"></span>
+               
+                <input asp-for="MontlyTaskCategory" type="hidden" class="form-control" />
+            
             </div>
             <div class="form-group mb-2">
                 <label asp-for="DailyTaskName">TaskName</label>

@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<MontlyTask>
+@{
+    var titles = ViewData["Titles"] as IEnumerable<string>;
+    var selectedtitle = ViewData["SelectedTitles"] as string;
+}
 <div class="content">
     <h2>Montly Task Dashboard</h2>
     <hr />
@@ -15,6 +19,28 @@
                 </div>
             }
         <div>
+            <div class="row mb-3">
+                 <div class="col-md-6">
+                      <form method="get">
+                          <div class="input-group">
+                              <select name="Title">
+                                  <option value="Select Titles">
+                                      @foreach (var items in titles)
+                                      {
+                                         <option value="@items"
+                                             selected="@(selectedtitle = items)">
+                                             @items
+                                            </option>
+                                      }
+                                   </option>                               
+                              </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              
+                          </div>
+                   </form>
+            </div>
+            
+            </div>
             <div class="mb-2">
                 <a asp-action="Create" class="btn btn-primary mb-2">Create</a>
                 <table class="table table-bordered table-sm table-hover font-monospace mb-2">

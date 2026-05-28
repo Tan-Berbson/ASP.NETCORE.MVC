@@ -10,6 +10,9 @@ namespace YAWA.COM.Data
         [Required, MaxLength(100)]
         public string LessonName { get; set; }
 
+        [Required, MaxLength(100)]
+        public string LessonStatus { get; set; }
+
         [Required, MaxLength(200)]
         public string LessonDescription { get; set; }
     }

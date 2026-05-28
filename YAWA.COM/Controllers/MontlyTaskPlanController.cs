@@ -12,10 +12,18 @@ namespace YAWA.COM.Controllers
        
         public MontlyTaskPlanController(IMonthlyTaskPlan repo) => _repo = repo;
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? title = null)
         {
-            var taskplan = await _repo.GetAlltasks(CurrentUserId);
-            return View(taskplan);
+            var titles = await _repo.GetDistictTitles(CurrentUserId);
+            ViewData["Titles"] = titles;
+            ViewData["SelectedTitles"] = title;
+
+            List<MontlyTask> montlytask = new();
+            if(!string.IsNullOrWhiteSpace(title))
+            {
+                montlytask = await _repo.GetByTitle(title,CurrentUserId);
+            }
+            return View(montlytask);
         }
         
         public async Task<IActionResult> Create()

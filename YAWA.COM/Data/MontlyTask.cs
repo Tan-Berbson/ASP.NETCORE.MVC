@@ -7,6 +7,8 @@ namespace YAWA.COM.Data
     public class MontlyTask : BaseEntity
     {
         [Required, MaxLength(100)]
+        public string MontlyTaskCategory { get; set; }
+        [Required, MaxLength(100)]
         public string DailyTaskName { get; set; }
 
         [Required, MaxLength(100)]
@@ -19,8 +21,7 @@ namespace YAWA.COM.Data
         public DateOnly EndDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
 
-        [Required,MaxLength(100)]
-        public string MontlyTaskCategory { get; set; }
+        
 
 
     }
