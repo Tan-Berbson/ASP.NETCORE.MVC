@@ -187,6 +187,7 @@ namespace PRACWEB102.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LessonTittle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LessonName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LessonStatus = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LessonDescription = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true)
                 },
@@ -206,7 +207,11 @@ namespace PRACWEB102.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MontlyTaskName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MontlyTaskCategory = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DailyTaskName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TaskStatus = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EndDate = table.Column<DateOnly>(type: "date", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true)
                 },
                 constraints: table =>

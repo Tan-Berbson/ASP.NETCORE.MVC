@@ -12,8 +12,8 @@ using YAWA.COM.Data;
 namespace PRACWEB102.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260526123335_init3")]
-    partial class init3
+    [Migration("20260529035813_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -281,6 +281,11 @@ namespace PRACWEB102.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("LessonName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LessonStatus")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");

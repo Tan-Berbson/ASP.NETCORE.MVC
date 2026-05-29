@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Utilities;
 using YAWA.COM.Contracts;
 using YAWA.COM.Data;
 using YAWA.COM.Repositories;
@@ -60,11 +61,10 @@ namespace YAWA.COM.Controllers
             if (!ModelState.IsValid)
                 return View("Edit", tasks); // ✅ Tell it to use Edit.cshtml
 
-            var existtask = await _repo.GetOne(tasks.Id, CurrentUserId);
-            if (existtask == null)
-                return NotFound();
+           await _repo.Update(tasks, CurrentUserId); 
+          TempData["Message"] = $"'{tasks.DailyTaskName}' updated successfully.";
 
-            await _repo.UpdateMontly(tasks, CurrentUserId); // ✅ Pass the full object
+        
             return RedirectToAction("Index");
         }
 

@@ -78,7 +78,7 @@ namespace YAWA.COM.Controllers
             var existlesson = await _repo.GetOne(lesson.Id, CurrentUserId);
             if(existlesson == null)
                 return NotFound();
-            await _repo.Update(lesson.Id, new {lesson.LessonName, lesson.LessonDescription, lesson.LessonStatus}, CurrentUserId);
+            await _repo.Update(lesson, CurrentUserId);
             TempData["Message"] = $"{lesson} Updated Successfully";
             return RedirectToAction("Index");
         }

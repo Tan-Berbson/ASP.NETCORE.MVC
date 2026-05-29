@@ -47,16 +47,16 @@ namespace YAWA.COM.Repositories
                 .FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
         }
 
-        public async Task Update(object id, object model, string userId)
+        public async Task Update(T entity,string userId)
         {
-            var entityId = Convert.ToInt32(id);
-            var entity = await _table.
-                
-                FirstOrDefaultAsync(e => e.Id == entityId && e.UserId == userId);
-            if (entity == null)
+            var tracked = await _table.FirstOrDefaultAsync(e => e.Id == entity.Id && e.UserId == userId);
+
+            if(tracked == null)
                 return;
 
-            _db.Entry(entity).CurrentValues.SetValues(model);
+            entity.UserId = userId;
+
+            _db.Entry(tracked).CurrentValues.SetValues(entity);
             await _db.SaveChangesAsync();
         }
     }
