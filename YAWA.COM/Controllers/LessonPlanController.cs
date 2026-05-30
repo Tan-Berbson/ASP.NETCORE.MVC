@@ -54,7 +54,7 @@ namespace YAWA.COM.Controllers
             SanitizeLesson(lesson);
 
             await _repo.Create(lesson, CurrentUserId);
-            TempData["Message"] = $"{lesson} Created Successfully";
+            TempData["Message"] = $"{lesson.LessonName} Created Successfully";
             return RedirectToAction("Index");
         }
         public async Task <IActionResult> Edit (int id)
@@ -79,7 +79,7 @@ namespace YAWA.COM.Controllers
             if(existlesson == null)
                 return NotFound();
             await _repo.Update(lesson, CurrentUserId);
-            TempData["Message"] = $"{lesson} Updated Successfully";
+            TempData["Message"] = $"{lesson.LessonName} Updated Successfully";
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Delete(int id)
@@ -95,7 +95,7 @@ namespace YAWA.COM.Controllers
         public async Task<IActionResult> ConfirmedDelete(int id, LessonPlanner lesson)
         {
             await _repo.Delete(id, CurrentUserId);
-            TempData["Message"] = $"{lesson} Deleted Successfully";
+            TempData["Message"] = $"{lesson.LessonName} Deleted Successfully";
 
             return RedirectToAction("Index");
         }

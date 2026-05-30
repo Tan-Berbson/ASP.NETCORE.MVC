@@ -20,26 +20,27 @@
             }
         <div>
             <div class="row mb-3">
-                 <div class="col-md-6">
+                 <div class="col-md-12">
                       <form method="get">
-                          <div class="input-group">
-                              <select name="Title">
-                                  <option value="Select Titles">
-                                      @foreach (var items in titles)
-                                      {
-                                         <option value="@items"
-                                             selected="@(selectedtitle = items)">
-                                             @items
+                         <div class="d-flex gap-2">
+                                <select name="Title" class="form-select">
+                                    <option value="">--selecTittle--</option>
+                                    @if(titles != null)
+                                    {
+                                        @foreach (var items in titles)
+                                        {
+                                            <option value="@items"
+                                                    selected="@(items == selectedtitle ? "selected" : null)">
+                                                @items
                                             </option>
-                                      }
-                                   </option>                               
-                              </select>
-                                <button type="submit" class="btn btn-primary">Filter</button>
-                              
-                          </div>
-                   </form>
-            </div>
-            
+                                        }
+                                    }
+                                </select>                              
+                                    <button type="submit" class="btn btn-primary">Filter</button>                                                         
+                             
+                         </div>
+                      </form>
+            </div>           
             </div>
             <div class="mb-2">
                 <a asp-action="Create" class="btn btn-primary mb-2">Create</a>

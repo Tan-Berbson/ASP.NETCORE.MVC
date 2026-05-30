@@ -40,7 +40,7 @@ namespace YAWA.COM.Controllers
                 return View(tasks);
 
             await _repo.Create(tasks ,CurrentUserId);
-            TempData["Message"] = $"MontlyTask{tasks} Created Successfully";
+            TempData["Message"] = $"MontlyTask{tasks.DailyTaskName} Created Successfully";
             return RedirectToAction("Index");
             
         }
